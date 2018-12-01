@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box
+}
+
+body {
+  font-family: monospace;
+  background: #f1f1f1;
+}
+
+.app {
+  //width: 100vw;
+  //height: 100vh;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  width: 640px;
+  height: 480px;
+  background: #ddd;
+  align-self: center;
+  flex-wrap: wrap;
+  margin: 40px auto;
+
+  &--disabled {
+    pointer-events: none;
+  }
+}
+
+.card {
+  display: flex;
+  border: 10px solid #ddd;
+  width: 25%;
+  height: calc(100% / 3);
+  background: #bbb;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 0;
+  font-size: 2rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.card--selected {
+  background: #a8a9ae;
+  font-size: 2rem;
+  color: #fff;
+}
+
+.card--win {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.card--not-match {
+  background-color: crimson;
+}
+
+.card--win,
+.body--win {
+  background: linear-gradient(267deg, #42d1d9, #ae5eee);
+  background-size: 400% 400%;
+
+  -webkit-animation: gradientAnimation 2s ease infinite;
+  -moz-animation: gradientAnimation 2s ease infinite;
+  animation: gradientAnimation 2s ease infinite;
+}
+
+@-webkit-keyframes gradientAnimation {
+  0% {
+    background-position: 0 51%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0 51%
+  }
+}
+
+@-moz-keyframes gradientAnimation {
+  0% {
+    background-position: 0 51%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0 51%
+  }
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0 51%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0 51%
+  }
+}
+
+.scores {
+
+  #start {
+    display: block;
+    align-self: center;
+    margin: 0 auto;
+  }
+
+  #current-score {
+    margin: 20px auto;
+  }
+
+  #moves {
+    margin: 20px auto;
+  }
+
+}
+
+.scoreboard {
+  max-width: 200px;
+  margin: 20px auto;
+
+  .scoreboard__title {
+    display: inline-block;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #333;
+  }
+
+  .scoreboard__table {
+
+  }
+}
+
+
+
+
+
+
+
+
+
