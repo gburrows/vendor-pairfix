@@ -1,5 +1,6 @@
 node_modules/
 .idea/*
 public/bundle*
+public/media*
 package-lock.json
 .DS_Store

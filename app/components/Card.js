@@ -80,10 +80,19 @@ class Card {
     }
 
     render(container) {
-        let card = document.createElement("div");
+        let card     = document.createElement("div"),
+            flipper  = document.createElement("div"),
+            front    = document.createElement("div"),
+            back     = document.createElement("div");
         card.setAttribute('id', 'card-' + this.index);
         card.setAttribute('class', 'card');
-        card.insertAdjacentHTML('afterbegin', this.pairNumber);
+        flipper.setAttribute('class', 'card__flipper');
+        front.setAttribute('class', 'card__front');
+        front.insertAdjacentHTML('afterbegin', this.pairNumber);
+        back.setAttribute('class', 'card__back');
+        card.appendChild(flipper);
+        flipper.appendChild(front);
+        flipper.appendChild(back);
         this.handleClick(container, card);
         return card;
     }

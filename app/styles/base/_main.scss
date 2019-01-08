@@ -14,13 +14,16 @@ body {
 }
 
 .container {
-  display: flex;
-  width: 640px;
-  height: 480px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 1rem;
+  width: 40rem;
+  height: 30rem;
   background: #ddd;
   align-self: center;
   flex-wrap: wrap;
-  margin: 40px auto;
+  margin: 2rem auto;
+  padding: 1rem;
 
   &--disabled {
     pointer-events: none;
@@ -28,38 +31,95 @@ body {
 }
 
 .card {
-  display: flex;
-  border: 10px solid #ddd;
-  width: 25%;
-  height: calc(100% / 3);
-  background: #bbb;
+  display: block;
+  background-size: auto;
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  font-size: 0;
   font-size: 2rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  perspective: 500px;
+
+  .card__flipper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: .5rem;
+    transform-style: preserve-3d;
+    transition: transform .2s ease;
+    transform: rotateY(180deg);
+  }
+
+  .card__front, .card__back {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    backface-visibility: hidden;
+  }
+
+  .card__front {
+    position: absolute;
+    background: #fff;
+    text-align: center;
+    z-index: 2;
+    transform: rotateY(0deg);
+  }
+
+  .card__back {
+    background-image: url('/media/memphis-colorful.png');
+    transform: rotateY(180deg);
+  }
+
+  &--selected {
+
+    .card__flipper {
+      transform: rotateY(0deg);
+    }
+  }
+
+  &--win {
+    .card__flipper {
+      border: 5px solid transparent;
+      transform: rotateY(0deg);
+      //background: linear-gradient(267deg, #42d1d9, #ae5eee);
+      //background:linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+      background:linear-gradient(124deg, #42d1d9, #ae5eee);
+      background-size: 400% 400%;
+
+      -webkit-animation: rainbow 2s ease infinite;
+      -moz-animation: gradientAnimation 2s ease infinite;
+      -o-animation: rainbow 2s ease infinite;
+      animation: rainbow 2s ease infinite;
+
+      //-webkit-animation: gradientAnimation 2s ease infinite;
+      //-moz-animation: gradientAnimation 2s ease infinite;
+      //animation: gradientAnimation 2s ease infinite;
+    }
+
+    .card__front {
+      border-radius: .25rem;
+    }
+  }
+
+  &--not-match {
+    .card__front{
+      background: crimson;
+      color: #fff;
+    }
+  }
 }
 
-.card--selected {
-  background: #a8a9ae;
-  font-size: 2rem;
-  color: #fff;
-}
-
-.card--win {
-  font-size: 2rem;
-  color: #fff;
-}
-
-.card--not-match {
-  background-color: crimson;
-}
-
-.card--win,
 .body--win {
   background: linear-gradient(267deg, #42d1d9, #ae5eee);
   background-size: 400% 400%;
@@ -67,6 +127,27 @@ body {
   -webkit-animation: gradientAnimation 2s ease infinite;
   -moz-animation: gradientAnimation 2s ease infinite;
   animation: gradientAnimation 2s ease infinite;
+}
+
+@-webkit-keyframes rainbow {
+  0% { background-position: 0 82% }
+  50% { background-position: 100% 19% }
+  100% { background-position: 0 82% }
+}
+@-moz-keyframes rainbow {
+  0% { background-position: 0 82% }
+  50% { background-position: 100% 19% }
+  100% { background-position: 0 82% }
+}
+@-o-keyframes rainbow {
+  0% { background-position: 0 82% }
+  50% { background-position: 100% 19% }
+  100% { background-position: 0 82% }
+}
+@keyframes rainbow {
+  0% { background-position: 0 82% }
+  50% { background-position: 100% 19% }
+  100% { background-position: 0 82% }
 }
 
 @-webkit-keyframes gradientAnimation {
@@ -95,13 +176,13 @@ body {
 
 @keyframes gradientAnimation {
   0% {
-    background-position: 0 51%
+    background-position: 0 100%
   }
   50% {
-    background-position: 100% 50%
+    background-position: 100% 0%
   }
   100% {
-    background-position: 0 51%
+    background-position: 0 100%
   }
 }
 
