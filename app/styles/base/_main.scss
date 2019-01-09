@@ -51,8 +51,9 @@ body {
     right: 0;
     border-radius: .5rem;
     transform-style: preserve-3d;
-    transition: transform .2s ease;
+    transition: transform .2s ease, border-radius .2s ease .2s;
     transform: rotateY(180deg);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
   }
 
   .card__front, .card__back {
@@ -92,19 +93,13 @@ body {
     .card__flipper {
       border: 5px solid transparent;
       transform: rotateY(0deg);
-      //background: linear-gradient(267deg, #42d1d9, #ae5eee);
       //background:linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
       background:linear-gradient(124deg, #42d1d9, #ae5eee);
       background-size: 400% 400%;
-
-      -webkit-animation: rainbow 2s ease infinite;
+      -webkit-animation: gradientAnimation 2s ease infinite;
       -moz-animation: gradientAnimation 2s ease infinite;
-      -o-animation: rainbow 2s ease infinite;
-      animation: rainbow 2s ease infinite;
-
-      //-webkit-animation: gradientAnimation 2s ease infinite;
-      //-moz-animation: gradientAnimation 2s ease infinite;
-      //animation: gradientAnimation 2s ease infinite;
+      -o-animation: gradientAnimation 2s ease infinite;
+      animation: gradientAnimation 2s ease infinite;
     }
 
     .card__front {
@@ -113,9 +108,13 @@ body {
   }
 
   &--not-match {
+    .card__flipper {
+      border: 5px solid crimson;
+      transform: rotateY(0deg);
+    }
+
     .card__front{
-      background: crimson;
-      color: #fff;
+      border-radius: .25rem;
     }
   }
 }
@@ -129,26 +128,6 @@ body {
   animation: gradientAnimation 2s ease infinite;
 }
 
-@-webkit-keyframes rainbow {
-  0% { background-position: 0 82% }
-  50% { background-position: 100% 19% }
-  100% { background-position: 0 82% }
-}
-@-moz-keyframes rainbow {
-  0% { background-position: 0 82% }
-  50% { background-position: 100% 19% }
-  100% { background-position: 0 82% }
-}
-@-o-keyframes rainbow {
-  0% { background-position: 0 82% }
-  50% { background-position: 100% 19% }
-  100% { background-position: 0 82% }
-}
-@keyframes rainbow {
-  0% { background-position: 0 82% }
-  50% { background-position: 100% 19% }
-  100% { background-position: 0 82% }
-}
 
 @-webkit-keyframes gradientAnimation {
   0% {

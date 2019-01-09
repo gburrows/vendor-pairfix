@@ -26,7 +26,7 @@ class Card {
                 cards[i].classList.remove('card--selected');
                 this.enableGame();
             }
-        }, 300);
+        }, 600);
     }
 
     disableGame() {
@@ -51,7 +51,8 @@ class Card {
             }
 
             if (this.classList.contains('card--selected')) {
-                this.classList.remove('card--selected');
+                // Uncomment to let users preview card with no added score
+                // this.classList.remove('card--selected');
                 return
             }
 
