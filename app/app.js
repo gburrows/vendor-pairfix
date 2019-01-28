@@ -7,12 +7,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let container           = document.querySelectorAll('#container')[0],
         startButton         = document.querySelectorAll('#start')[0],
+        levelButtons        = document.querySelectorAll('.level'),
         scoreElement        = document.querySelectorAll('#current-score')[0],
         movesElement        = document.querySelectorAll('#moves')[0],
         scoreBoardElement   = document.querySelectorAll('#scoreboard-table')[0],
         stopwatchElement    = document.querySelectorAll('#stopwatch')[0],
-        numberOfCards       = 12,
         scoreboard          = {},
+        numberOfCards,
         game;
 
     function gameReset() {
@@ -26,12 +27,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
     startButton.addEventListener('click', function () {
         if (typeof game === 'object') {
-            console.log('game exists');
             game.stopwatch.stop();
         }
         gameReset();
 
-        game = new Game(container, numberOfCards, scoreElement, movesElement, stopwatchElement);
-        game.render();
+        this.classList.add('start--hide');
+
+        levelButtons.forEach((el) => {
+            el.classList.add('level--show');
+        });
+
     });
+
+    levelButtons.forEach((el) => {
+        el.addEventListener('click', function () {
+            let level = this.getAttribute('data-level');
+
+            switch(level) {
+                case 'easy':
+                    numberOfCards = 12;
+                    container.setAttribute('data-level', level);
+                    break;
+                case 'normal':
+                    numberOfCards = 30;
+                    container.setAttribute('data-level', level);
+                    break;
+                case 'hard':
+                    numberOfCards = 48;
+                    container.setAttribute('data-level', level);
+                    break;
+                default:
+                    break;
+            }
+
+            levelButtons.forEach((el) => {
+                el.classList.remove('level--show');
+            });
+            startButton.classList.remove('start--hide');
+
+            game = new Game(container, numberOfCards, scoreElement, movesElement, stopwatchElement);
+            game.render();
+        });
+    });
+
 });
