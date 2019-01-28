@@ -2,28 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Gothic+A1:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 </head>
 <body>
 <div class="app">
-    <div id="container" class="container">
-    </div>
-    <div class="scores">
-        <button id="start">New game</button>
-        <div id="moves">
-            &nbsp;
-        </div>
-        <div id="current-score">
-            &nbsp;
-        </div>
-        <div id="stopwatch">
-            &nbsp;
+
+    <div class="main">
+        <div id="container" class="container">
         </div>
     </div>
-    <div class="scoreboard">
-        <h4 class="scoreboard__title">Scoreboard</h4>
-        <div id="scoreboard-table" class="scoreboard__table"></div>
+    <div class="side">
+        <div class="title">
+            <div class="title__text">Vendor<br>Pairfix</div>
+        </div>
+        <div class="scores">
+            <div id="moves">
+                &nbsp;
+            </div>
+            <div id="current-score">
+                &nbsp;
+            </div>
+            <div id="stopwatch">
+                &nbsp;
+            </div>
+        </div>
+        <button id="start" class="btn">New game</button>
+        <div class="scoreboard">
+            <h4 class="scoreboard__title">Scoreboard</h4>
+            <div id="scoreboard-table" class="scoreboard__table"></div>
+        </div>
     </div>
+
 </div>
 
 <script src="/bundle.js"></script>

@@ -1,8 +1,12 @@
+import { vendorLogos } from './vendor-logos';
+
 class Card {
     constructor(index, pairNumber, game) {
         this.index = index;
         this.pairNumber = pairNumber;
         this.game = game;
+        this.pairImages  = vendorLogos;
+        this.pairImage = this.pairImages[this.pairNumber - 1]
     }
 
     pairMatch(cards) {
@@ -84,16 +88,18 @@ class Card {
         let card     = document.createElement("div"),
             flipper  = document.createElement("div"),
             front    = document.createElement("div"),
-            back     = document.createElement("div");
+            back     = document.createElement("div"),
+            image    = document.createElement("img");
         card.setAttribute('id', 'card-' + this.index);
         card.setAttribute('class', 'card');
         flipper.setAttribute('class', 'card__flipper');
         front.setAttribute('class', 'card__front');
-        front.insertAdjacentHTML('afterbegin', this.pairNumber);
         back.setAttribute('class', 'card__back');
+        image.setAttribute('src', this.pairImage);
         card.appendChild(flipper);
         flipper.appendChild(front);
         flipper.appendChild(back);
+        front.appendChild(image);
         this.handleClick(container, card);
         return card;
     }

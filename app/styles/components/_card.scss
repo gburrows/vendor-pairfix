@@ -1,1 +1,95 @@
+.card {
+  display: block;
+  background-size: auto;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 2rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  perspective: 500px;
 
+  &__flipper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 5px solid #efefef;
+    border-radius: .5rem;
+    transform-style: preserve-3d;
+    transition: transform .2s ease, border-radius .2s ease .2s, border-color 0.3s ease;
+    transform: rotateY(180deg);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  &__front, &__back {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: .25rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    backface-visibility: hidden;
+  }
+
+  &__front {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    text-align: center;
+    z-index: 2;
+    transform: rotateY(0deg);
+
+    img {
+      width: 60%;
+      height: 60%;
+    }
+  }
+
+  &__back {
+    background-image: url('/media/backgrounds/memphis-colorful.png');
+    transform: rotateY(180deg);
+  }
+
+  &--selected {
+
+    .card__flipper {
+      transform: rotateY(0deg);
+    }
+  }
+
+  &--win {
+    .card__flipper {
+      border: 5px solid transparent;
+      transform: rotateY(0deg);
+      //background:linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+      background:linear-gradient(124deg, #42d1d9, #ae5eee);
+      background-size: 400% 400%;
+      -webkit-animation: gradientAnimation 2s ease infinite;
+      -moz-animation: gradientAnimation 2s ease infinite;
+      animation: gradientAnimation 2s ease infinite;
+    }
+
+    .card__front {
+      border-radius: .25rem;
+    }
+  }
+
+  &--not-match {
+    .card__flipper {
+      border: 5px solid crimson;
+      transform: rotateY(0deg);
+    }
+
+    .card__front{
+      border-radius: .25rem;
+    }
+  }
+}

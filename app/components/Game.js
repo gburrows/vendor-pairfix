@@ -1,5 +1,5 @@
 import Card from './Card';
-import Stopwatch from "./Stopwatch";
+import Stopwatch from './Stopwatch';
 
 class Game {
     constructor(container, number, scoreElement, movesElement, stopwatchElement) {
