@@ -5,7 +5,8 @@ import Game from './components/Game.js';
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    let container           = document.querySelectorAll('#container')[0],
+    let app                 = document.querySelectorAll('.app')[0],
+        container           = document.querySelectorAll('#container')[0],
         startButton         = document.querySelectorAll('#start')[0],
         levelButtons        = document.querySelectorAll('.level'),
         scoreElement        = document.querySelectorAll('#current-score')[0],
@@ -15,6 +16,12 @@ document.addEventListener("DOMContentLoaded", function () {
         scoreboard          = {},
         numberOfCards,
         game;
+
+
+    setTimeout(() => {
+        app.setAttribute('style', 'opacity: 1;');
+    }, 500);
+
 
     function gameReset() {
         while (container.firstChild) {

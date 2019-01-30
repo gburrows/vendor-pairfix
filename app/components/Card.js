@@ -1,12 +1,12 @@
-import { vendorLogos } from './vendor-logos';
+import {vendorLogos} from './vendor-logos';
 
 class Card {
     constructor(index, pairNumber, game) {
         this.index = index;
         this.pairNumber = pairNumber;
         this.game = game;
-        this.pairImages  = vendorLogos;
-        this.pairImage = this.pairImages[this.pairNumber - 1]
+        this.pairImages = vendorLogos;
+        this.pairImage = this.pairImages[this.pairNumber - 1];
     }
 
     pairMatch(cards) {
@@ -16,7 +16,7 @@ class Card {
         }
         this.game.updateMoves();
         this.game.updateScore();
-        this.enableGame();
+        // this.enableGame();
     }
 
     pairNotMatch(cards) {
@@ -24,11 +24,15 @@ class Card {
             cards[i].classList.add('card--not-match');
         }
         this.game.updateMoves();
-        setTimeout(() => {
+        this.game.timerActive = true;
+        this.game.pairNotMatchTimer = setTimeout(() => {
+            this.game.timerActive = false;
+            console.log(this.game.timerActive);
+
             for (let i = 0; i < cards.length; i++) {
                 cards[i].classList.remove('card--not-match');
                 cards[i].classList.remove('card--selected');
-                this.enableGame();
+                // this.enableGame();
             }
         }, 600);
     }
@@ -41,9 +45,34 @@ class Card {
         this.game.container.classList.remove('container--disabled');
     }
 
+    clearNotMatchTimer(that) {
+        clearTimeout(that.game.pairNotMatchTimer);
+        that.game.timerActive = false;
+        let selectedCards = document.querySelectorAll('.card--selected');
+        for (let i = 0; i < selectedCards.length; i++) {
+            selectedCards[i].classList.remove('card--not-match');
+            selectedCards[i].classList.remove('card--selected');
+            // that.enableGame();
+        }
+    }
+
     handleClick(container, element) {
         const that = this;
-        element.addEventListener('click', function () {
+
+        container.parentElement.addEventListener('click', function (e) {
+            e.stopPropagation();
+
+            if (that.game.timerActive === true) {
+                that.clearNotMatchTimer(that);
+            }
+        });
+
+        element.addEventListener('click', function (e) {
+            e.stopPropagation();
+
+            if (that.game.timerActive === true) {
+                that.clearNotMatchTimer(that);
+            }
 
             if (that.game.gameStart === false) {
                 that.game.gameStart = true;
@@ -65,7 +94,7 @@ class Card {
             let selectedCards = document.querySelectorAll('.card--selected');
 
             if (selectedCards.length > 1) {
-                that.disableGame();
+                // that.disableGame();
 
                 if (selectedCards[0].innerHTML === selectedCards[1].innerHTML) {
                     that.pairMatch(selectedCards);
@@ -85,11 +114,11 @@ class Card {
     }
 
     render(container) {
-        let card     = document.createElement("div"),
-            flipper  = document.createElement("div"),
-            front    = document.createElement("div"),
-            back     = document.createElement("div"),
-            image    = document.createElement("img");
+        let card = document.createElement("div"),
+            flipper = document.createElement("div"),
+            front = document.createElement("div"),
+            back = document.createElement("div"),
+            image = document.createElement("img");
         card.setAttribute('id', 'card-' + this.index);
         card.setAttribute('class', 'card');
         flipper.setAttribute('class', 'card__flipper');

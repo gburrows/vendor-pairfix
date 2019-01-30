@@ -13,6 +13,8 @@ class Game {
         this.stopwatchElement = stopwatchElement;
         this.stopwatch = {};
         this.gameWon = false;
+        this.timerActive = false;
+        this.pairNotMatchTimer;
     }
 
     updateMoves() {

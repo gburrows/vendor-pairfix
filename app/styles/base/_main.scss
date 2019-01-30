@@ -22,12 +22,11 @@ body {
 }
 
 .app {
-  //width: 100vw;
-  //height: 100vh;
   text-align: center;
   display: flex;
   flex-direction: row-reverse;
   height: 100vh;
+  transition: opacity .3s ease;
 }
 
 .body--win {
