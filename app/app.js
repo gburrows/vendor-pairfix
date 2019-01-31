@@ -28,8 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
             container.removeChild(container.firstChild);
         }
         document.body.classList.remove('body--win');
-        movesElement.innerHTML = `Moves taken 0`;
-        scoreElement.innerHTML = `0 / ${numberOfCards / 2}`;
     }
 
     startButton.addEventListener('click', function () {
@@ -71,6 +69,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 el.classList.remove('level--show');
             });
             startButton.classList.remove('start--hide');
+
+            movesElement.innerHTML = `Moves taken 0`;
+            scoreElement.innerHTML = `0 / ${numberOfCards / 2}`;
 
             game = new Game(container, numberOfCards, scoreElement, movesElement, stopwatchElement);
             game.render();

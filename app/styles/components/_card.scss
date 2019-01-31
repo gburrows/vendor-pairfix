@@ -1,5 +1,5 @@
 .card {
-  display: block;
+  display: flex;
   background-size: auto;
   justify-content: center;
   flex-direction: column;
@@ -12,11 +12,7 @@
   perspective: 500px;
 
   &__flipper {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    flex: 1;
     border: 5px solid #efefef;
     border-radius: .5rem;
     transform-style: preserve-3d;
@@ -39,8 +35,6 @@
   }
 
   &__front {
-    position: absolute;
-    display: flex;
     align-items: center;
     background: #fff;
     text-align: center;

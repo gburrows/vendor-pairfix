@@ -34,7 +34,7 @@ class Card {
                 cards[i].classList.remove('card--selected');
                 // this.enableGame();
             }
-        }, 600);
+        }, 2000);
     }
 
     disableGame() {
