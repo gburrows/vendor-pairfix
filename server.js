@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Redirects all traffic to http if it's https. OpenWeatherMap free API only supports http
+// Redirects all traffic to http if it's https.
 app.use(function(req, res, next) {
 	if (req.headers['x-forwarded-proto'] === 'https') {
 		res.redirect('http://' + req.hostname + req.url);

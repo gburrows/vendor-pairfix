@@ -105,10 +105,28 @@ class Card {
 
             let cardsMatched = document.querySelectorAll('.card--win');
 
+            console.log(cardsMatched[0])
+
             if (cardsMatched.length === container.children.length) {
                 that.game.stopwatch.stop();
                 that.game.gameWon = true;
                 document.body.classList.add('body--win');
+
+                const spinCards = function() {
+                    for (let i = 0; i < cardsMatched.length; i++) {
+                        let toggleItemMove = getToggleItemMove( i );
+                        setTimeout( toggleItemMove, i * 100);
+                    }
+                };
+                spinCards();
+
+                function getToggleItemMove( i ) {
+                    let item = cardsMatched[i];
+                    return function() {
+                        item.classList.toggle('card--spin');
+                    }
+                }
+
             }
         });
     }

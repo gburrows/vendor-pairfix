@@ -9,7 +9,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  perspective: 500px;
+  perspective: 2500px;
 
   &__flipper {
     flex: 1;
@@ -19,6 +19,7 @@
     transition: transform .2s ease, border-radius .2s ease .2s, border-color 0.3s ease;
     transform: rotateY(180deg);
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+    will-change: transform, border-radius, border-color;
   }
 
   &__front, &__back {
@@ -64,11 +65,12 @@
       border: 5px solid transparent;
       transform: rotateY(0deg);
       //background:linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-      background:linear-gradient(124deg, #42d1d9, #ae5eee);
+      //background:linear-gradient(124deg, #42d1d9, #ae5eee);
+      background: #76e076;
       background-size: 400% 400%;
-      -webkit-animation: gradientAnimation 2s ease infinite;
-      -moz-animation: gradientAnimation 2s ease infinite;
-      animation: gradientAnimation 2s ease infinite;
+      //-webkit-animation: gradientAnimation 2s ease infinite;
+      //-moz-animation: gradientAnimation 2s ease infinite;
+      //animation: gradientAnimation 2s ease infinite;
     }
 
     .card__front {
@@ -84,6 +86,14 @@
 
     .card__front{
       border-radius: .25rem;
+    }
+  }
+
+  &--spin {
+    .card__flipper {
+      -webkit-animation: cardSpin 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      -moz-animation: cardSpin 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      animation: cardSpin 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
   }
 }
