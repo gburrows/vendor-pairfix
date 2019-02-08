@@ -1,9 +1,8 @@
 const express = require('express');
 
-// Create our app
-
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = '0.0.0.0';
 
 // Redirects all traffic to http if it's https.
 app.use(function(req, res, next) {
@@ -16,6 +15,6 @@ app.use(function(req, res, next) {
 
 app.use(express.static('public'));
 
-app.listen(PORT, function () {
+app.listen(PORT, HOST, function () {
 	console.log('Express server is up on port ' + PORT);
 });
