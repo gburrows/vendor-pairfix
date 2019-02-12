@@ -10,16 +10,37 @@
   -ms-user-select: none;
   user-select: none;
   perspective: 2500px;
+  border-radius: $card-radius-medium;
 
   &__flipper {
     flex: 1;
-    border: 5px solid #efefef;
-    border-radius: .5rem;
     transform-style: preserve-3d;
     transition: transform .2s ease, border-radius .2s ease .2s, border-color 0.3s ease;
     transform: rotateY(180deg);
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
     will-change: transform, border-radius, border-color;
+    border-radius: $card-radius-medium;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: $card-radius-medium;
+      bottom: $card-radius-medium;
+      left: $card-radius-medium;
+      right: $card-radius-medium;
+      z-index: 2;
+      border-radius: $card-radius-small;
+      border: 3px solid transparent;
+      transition: border-color 0.3s ease;
+
+      @include media("<=tablet") {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: $card-radius-medium;
+      }
+    }
   }
 
   &__front, &__back {
@@ -28,7 +49,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    border-radius: .25rem;
+    border-radius: $card-radius-medium;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -62,30 +83,22 @@
 
   &--win {
     .card__flipper {
-      border: 5px solid transparent;
       transform: rotateY(0deg);
-      //background:linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-      //background:linear-gradient(124deg, #42d1d9, #ae5eee);
-      background: #76e076;
       background-size: 400% 400%;
-      //-webkit-animation: gradientAnimation 2s ease infinite;
-      //-moz-animation: gradientAnimation 2s ease infinite;
-      //animation: gradientAnimation 2s ease infinite;
-    }
 
-    .card__front {
-      border-radius: .25rem;
+      &:after {
+        border-color: #76e076;
+      }
     }
   }
 
   &--not-match {
     .card__flipper {
-      border: 5px solid crimson;
       transform: rotateY(0deg);
-    }
 
-    .card__front{
-      border-radius: .25rem;
+      &:after {
+        border-color: crimson;
+      }
     }
   }
 

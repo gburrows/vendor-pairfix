@@ -16,7 +16,6 @@ class Card {
         }
         this.game.updateMoves();
         this.game.updateScore();
-        // this.enableGame();
     }
 
     pairNotMatch(cards) {
@@ -32,7 +31,6 @@ class Card {
             for (let i = 0; i < cards.length; i++) {
                 cards[i].classList.remove('card--not-match');
                 cards[i].classList.remove('card--selected');
-                // this.enableGame();
             }
         }, 2000);
     }
@@ -52,7 +50,6 @@ class Card {
         for (let i = 0; i < selectedCards.length; i++) {
             selectedCards[i].classList.remove('card--not-match');
             selectedCards[i].classList.remove('card--selected');
-            // that.enableGame();
         }
     }
 
