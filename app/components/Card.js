@@ -1,139 +1,60 @@
 import {vendorLogos} from './vendor-logos';
 
 class Card {
-    constructor(index, pairNumber, game) {
+    constructor(index, game, pairNumber) {
         this.index = index;
-        this.pairNumber = pairNumber;
         this.game = game;
-        this.pairImages = vendorLogos;
-        this.pairImage = this.pairImages[this.pairNumber - 1];
+        this.pairNumber = pairNumber;
+        this.pairImage = vendorLogos[this.pairNumber - 1];
     }
 
-    pairMatch(cards) {
-        for (let i = 0; i < cards.length; i++) {
-            cards[i].classList.add('card--win');
-            cards[i].classList.remove('card--selected');
-        }
-        this.game.updateMoves();
-        this.game.updateScore();
-    }
-
-    pairNotMatch(cards) {
-        for (let i = 0; i < cards.length; i++) {
-            cards[i].classList.add('card--not-match');
-        }
-        this.game.updateMoves();
-        this.game.timerActive = true;
-        this.game.pairNotMatchTimer = setTimeout(() => {
-            this.game.timerActive = false;
-            console.log(this.game.timerActive);
-
-            for (let i = 0; i < cards.length; i++) {
-                cards[i].classList.remove('card--not-match');
-                cards[i].classList.remove('card--selected');
-            }
-        }, 2000);
-    }
-
-    disableGame() {
-        this.game.container.classList.add('container--disabled');
-    }
-
-    enableGame() {
-        this.game.container.classList.remove('container--disabled');
-    }
-
-    clearNotMatchTimer(that) {
-        clearTimeout(that.game.pairNotMatchTimer);
-        that.game.timerActive = false;
-        let selectedCards = document.querySelectorAll('.card--selected');
-        for (let i = 0; i < selectedCards.length; i++) {
-            selectedCards[i].classList.remove('card--not-match');
-            selectedCards[i].classList.remove('card--selected');
-        }
-    }
-
-    handleClick(container, element) {
+    handleClick(container, cardElement) {
         const that = this;
 
+        // Turn unmatched cards back over if click on container element
         container.parentElement.addEventListener('click', function (e) {
             e.stopPropagation();
+            e.preventDefault();
 
-            if (that.game.timerActive === true) {
-                that.clearNotMatchTimer(that);
+            if (that.game.timerActive) {
+                that.game.clearNotMatchTimer(that);
             }
         });
 
-        element.addEventListener('click', function (e) {
+        // Handle card event
+        cardElement.addEventListener('click', function (e) {
             e.stopPropagation();
+            e.preventDefault();
 
-            if (that.game.timerActive === true) {
-                that.clearNotMatchTimer(that);
+            // Cancels timer for cards that did not match
+            if (that.game.timerActive) {
+                that.game.clearNotMatchTimer();
             }
 
-            if (that.game.gameStart === false) {
-                that.game.gameStart = true;
-                that.game.stopwatch.start();
+            if (!that.game.gameStart) {
+                that.game.start();
             }
 
+            // Return if card is already from a winning pair
             if (this.classList.contains('card--win')) {
-                return
-            }
-
-            if (this.classList.contains('card--selected')) {
-                // Uncomment to let users preview card with no added score
-                // this.classList.remove('card--selected');
                 return
             }
 
             this.classList.add('card--selected');
 
-            let selectedCards = document.querySelectorAll('.card--selected');
-
-            if (selectedCards.length > 1) {
-                // that.disableGame();
-
-                if (selectedCards[0].innerHTML === selectedCards[1].innerHTML) {
-                    that.pairMatch(selectedCards);
-                } else {
-                    that.pairNotMatch(selectedCards);
-                }
-            }
-
-            let cardsMatched = document.querySelectorAll('.card--win');
-
-            console.log(cardsMatched[0])
-
-            if (cardsMatched.length === container.children.length) {
-                that.game.stopwatch.stop();
-                that.game.gameWon = true;
-                document.body.classList.add('body--win');
-
-                const spinCards = function() {
-                    for (let i = 0; i < cardsMatched.length; i++) {
-                        let toggleItemMove = getToggleItemMove( i );
-                        setTimeout( toggleItemMove, i * 100);
-                    }
-                };
-                spinCards();
-
-                function getToggleItemMove( i ) {
-                    let item = cardsMatched[i];
-                    return function() {
-                        item.classList.toggle('card--spin');
-                    }
-                }
-
-            }
+            that.game.getSelectedCards();
+            that.game.checkIfPair();
+            that.game.checkIfWin();
         });
     }
 
     render(container) {
-        let card = document.createElement("div"),
-            flipper = document.createElement("div"),
-            front = document.createElement("div"),
-            back = document.createElement("div"),
-            image = document.createElement("img");
+        const card = document.createElement("div"),
+              flipper = document.createElement("div"),
+              front = document.createElement("div"),
+              back = document.createElement("div"),
+              image = document.createElement("img");
+
         card.setAttribute('id', 'card-' + this.index);
         card.setAttribute('class', 'card');
         flipper.setAttribute('class', 'card__flipper');
@@ -145,9 +66,9 @@ class Card {
         flipper.appendChild(back);
         front.appendChild(image);
         this.handleClick(container, card);
+
         return card;
     }
-
 }
 
 export default Card;

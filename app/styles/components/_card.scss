@@ -20,27 +20,6 @@
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
     will-change: transform, border-radius, border-color;
     border-radius: $card-radius-medium;
-
-    &:after {
-      content: '';
-      position: absolute;
-      top: $card-radius-medium;
-      bottom: $card-radius-medium;
-      left: $card-radius-medium;
-      right: $card-radius-medium;
-      z-index: 2;
-      border-radius: $card-radius-small;
-      border: 3px solid transparent;
-      transition: border-color 0.3s ease;
-
-      @include media("<=tablet") {
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        border-radius: $card-radius-medium;
-      }
-    }
   }
 
   &__front, &__back {
@@ -49,11 +28,12 @@
     bottom: 0;
     left: 0;
     right: 0;
-    border-radius: $card-radius-medium;
+    border-radius: 0.5rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   &__front {
@@ -67,10 +47,33 @@
       width: 60%;
       height: 60%;
     }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      bottom: -1px;
+      left: -1px;
+      right: -1px;
+      z-index: 2;
+      border-radius: 0.5rem;
+      border: 4px solid transparent;
+      transition: border-color 0.3s ease;
+
+      @include media("<=tablet") {
+        border: 3px solid transparent;
+        //top: 0;
+        //bottom: 0;
+        //left: 0;
+        //right: 0;
+        //border-radius: $card-radius-medium;
+      }
+    }
   }
 
   &__back {
     background-image: url('/media/backgrounds/memphis-colorful.png');
+    background-size: 150%;
     transform: rotateY(180deg);
   }
 
@@ -85,20 +88,20 @@
     .card__flipper {
       transform: rotateY(0deg);
       background-size: 400% 400%;
+    }
 
-      &:after {
-        border-color: #76e076;
-      }
+    .card__front:after {
+      border-color: #76e076;
     }
   }
 
   &--not-match {
     .card__flipper {
       transform: rotateY(0deg);
+    }
 
-      &:after {
-        border-color: crimson;
-      }
+    .card__front:after {
+      border-color: crimson;
     }
   }
 

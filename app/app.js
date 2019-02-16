@@ -1,81 +1,69 @@
-'use strict';
-
 import './styles/app.scss';
 import Game from './components/Game.js';
 
-document.addEventListener("DOMContentLoaded", function () {
+const app = () => {
+    // Initialise DOM elements
+    const   appElement       = document.querySelectorAll('.app')[0],
+            container        = document.querySelectorAll('#container')[0],
+            startButton      = document.querySelectorAll('#start')[0],
+            levelButtons     = document.querySelectorAll('.level-outer')[0],
+            scoreElement     = document.querySelectorAll('#current-score')[0],
+            movesElement     = document.querySelectorAll('#moves')[0],
+            stopwatchElement = document.querySelectorAll('#stopwatch')[0];
+    let     numberOfCards,
+            game;
 
-    let app                 = document.querySelectorAll('.app')[0],
-        container           = document.querySelectorAll('#container')[0],
-        startButton         = document.querySelectorAll('#start')[0],
-        levelButtons        = document.querySelectorAll('.level'),
-        scoreElement        = document.querySelectorAll('#current-score')[0],
-        movesElement        = document.querySelectorAll('#moves')[0],
-        scoreBoardElement   = document.querySelectorAll('#scoreboard-table')[0],
-        stopwatchElement    = document.querySelectorAll('#stopwatch')[0],
-        scoreboard          = {},
-        numberOfCards,
-        game;
-
-
+    // Fade in after CSS loads
     setTimeout(() => {
-        app.setAttribute('style', 'opacity: 1;');
+        appElement.setAttribute('style', 'opacity: 1;');
     }, 500);
 
-
     function gameReset() {
-        while (container.firstChild) {
-            container.removeChild(container.firstChild);
+        if (game && game.stopwatch) {
+            game.stopwatch.stop();
         }
-        document.body.classList.remove('body--win');
+        container.innerHTML = '';
+    }
+
+    // Set number of cards based on level
+    function setCardNumber(level) {
+        switch(level) {
+            case 'easy':
+                numberOfCards = 12;
+                break;
+            case 'normal':
+                numberOfCards = 30;
+                break;
+            case 'hard':
+                numberOfCards = 48;
+                break;
+            default:
+                break;
+        }
     }
 
     startButton.addEventListener('click', function () {
-        if (typeof game === 'object') {
-            game.stopwatch.stop();
-        }
         gameReset();
 
         this.classList.add('start--hide');
-
-        levelButtons.forEach((el) => {
-            el.classList.add('level--show');
-        });
-
+        levelButtons.classList.add('level-outer--show');
     });
 
-    levelButtons.forEach((el) => {
-        el.addEventListener('click', function () {
-            let level = this.getAttribute('data-level');
+    // Start game by selecting level
+    levelButtons.childNodes.forEach((el) => {
+        el.addEventListener('click', () => {
+            const level = el.getAttribute('data-level');
+            container.setAttribute('data-level', level);
 
-            switch(level) {
-                case 'easy':
-                    numberOfCards = 12;
-                    container.setAttribute('data-level', level);
-                    break;
-                case 'normal':
-                    numberOfCards = 30;
-                    container.setAttribute('data-level', level);
-                    break;
-                case 'hard':
-                    numberOfCards = 48;
-                    container.setAttribute('data-level', level);
-                    break;
-                default:
-                    break;
-            }
+            setCardNumber(level);
 
-            levelButtons.forEach((el) => {
-                el.classList.remove('level--show');
-            });
+            levelButtons.classList.remove('level-outer--show');
             startButton.classList.remove('start--hide');
-
-            movesElement.innerHTML = `Moves taken 0`;
-            scoreElement.innerHTML = `0 / ${numberOfCards / 2}`;
 
             game = new Game(container, numberOfCards, scoreElement, movesElement, stopwatchElement);
             game.render();
         });
     });
+};
 
-});
+document.addEventListener('DOMContentLoaded', app);
