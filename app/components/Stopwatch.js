@@ -11,7 +11,10 @@ class Stopwatch {
     }
 
     start() {
-        if (!this.time) this.time = performance.now();
+        if (!this.time) {
+            this.time = performance.now();
+        }
+
         if (!this.running) {
             this.running = true;
             requestAnimationFrame(this.step.bind(this));
@@ -23,21 +26,9 @@ class Stopwatch {
         this.time = null;
     }
 
-    restart() {
-        if (!this.time) this.time = performance.now();
-        if (!this.running) {
-            this.running = true;
-            requestAnimationFrame(this.step.bind(this));
-        }
-        this.reset();
-    }
-
-    clear() {
-        this.clearChildren(this.element);
-    }
-
     step(timestamp) {
         if (!this.running) return;
+
         this.calculate(timestamp);
         this.time = timestamp;
         this.print();
@@ -46,14 +37,14 @@ class Stopwatch {
 
     calculate(timestamp) {
         let diff = timestamp - this.time;
-        // Hundredths of a second are 100 ms
+        // Hundredths of a second
         this.times[2] += diff / 10;
-        // Seconds are 100 hundredths of a second
+        // Seconds
         if (this.times[2] >= 100) {
             this.times[1] += 1;
             this.times[2] -= 100;
         }
-        // Minutes are 60 seconds
+        // Minutes
         if (this.times[1] >= 60) {
             this.times[0] += 1;
             this.times[1] -= 60;
@@ -66,18 +57,17 @@ class Stopwatch {
 
     pad0(value, count) {
         let result = value.toString();
-        for (; result.length < count; --count)
+
+        while (result.length < count) {
             result = '0' + result;
+            count--;
+        }
+
         return result;
     }
 
     format(times) {
-        return `${this.pad0(times[0], 2)} : ${this.pad0(times[1], 2)}: ${this.pad0(Math.floor(times[2]), 2)}`;
-    }
-
-    clearChildren(node) {
-        while (node.lastChild)
-            node.removeChild(node.lastChild);
+        return `${this.pad0(times[0], 2)} : ${this.pad0(times[1], 2)} : ${this.pad0(Math.floor(times[2]), 2)}`;
     }
 }
 

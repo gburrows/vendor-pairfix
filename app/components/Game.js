@@ -51,6 +51,7 @@ class Game {
             this.selectedCards[i].classList.add('card--win');
             this.selectedCards[i].classList.remove('card--selected');
         }
+
         this.updateMoves();
         this.updateScore();
     }
@@ -59,6 +60,7 @@ class Game {
         for (let i = 0; i < this.selectedCards.length; i++) {
             this.selectedCards[i].classList.add('card--not-match');
         }
+
         this.updateMoves();
         this.timerActive = true;
 
@@ -66,7 +68,7 @@ class Game {
         this.pairNotMatchTimer = setTimeout(() => {
             this.timerActive = false;
 
-            this.unselectCardPair(this.selectedCards)
+            this.unselectCardPair(this.selectedCards);
         }, 2000);
     }
 
@@ -106,7 +108,6 @@ class Game {
         }
     }
 
-
     shuffleCards(array) {
         let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -118,6 +119,7 @@ class Game {
             array[currentIndex] = array[randomIndex];
             array[randomIndex] = temporaryValue;
         }
+
         return array;
     }
 

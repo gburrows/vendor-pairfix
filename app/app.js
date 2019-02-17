@@ -22,6 +22,7 @@ const app = () => {
         if (game && game.stopwatch) {
             game.stopwatch.stop();
         }
+
         container.innerHTML = '';
     }
 

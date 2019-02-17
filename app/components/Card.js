@@ -49,11 +49,11 @@ class Card {
     }
 
     render(container) {
-        const card = document.createElement("div"),
+        const card    = document.createElement("div"),
               flipper = document.createElement("div"),
-              front = document.createElement("div"),
-              back = document.createElement("div"),
-              image = document.createElement("img");
+              front   = document.createElement("div"),
+              back    = document.createElement("div"),
+              image   = document.createElement("img");
 
         card.setAttribute('id', 'card-' + this.index);
         card.setAttribute('class', 'card');
