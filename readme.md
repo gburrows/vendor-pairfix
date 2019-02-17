@@ -2,6 +2,8 @@
 
 A pairs card game matching browser vendors
 
+[Demo](http://vendor-pairfix.herokuapp.com) 
+
 ## Built With
 
 * [Node.js](https://nodejs.org/en/)
