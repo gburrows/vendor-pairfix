@@ -23,7 +23,20 @@ const app = () => {
             game.stopwatch.stop();
         }
 
-        container.innerHTML = '';
+        container.innerHTML = `
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>`;
+        container.setAttribute('data-level', '');
     }
 
     // Set number of cards based on level
@@ -60,6 +73,7 @@ const app = () => {
 
             levelButtons.classList.remove('level-outer--show');
             startButton.classList.remove('start--hide');
+            container.innerHTML = '';
 
             game = new Game(container, numberOfCards, scoreElement, movesElement, stopwatchElement);
             game.render();

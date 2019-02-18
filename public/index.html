@@ -6,55 +6,54 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600,700" rel="stylesheet">
 </head>
 <body>
 <div class="app" style="opacity:0">
-
-    <div class="main">
-        <div id="container" class="container" data-level>
+    <div class="app__inner">
+        <div class="main">
+            <div id="container" class="container" data-level>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+            </div>
+        </div>
+        <div class="side">
+            <div class="title">
+                <div class="title__text">
+                    <span class="title__text-first">vendor</span>-<span class="title__text-second">pairfix</span>
+                </div>
+            </div>
+            <div class="scores">
+                <div id="moves">
+                    &nbsp;
+                </div>
+                <div id="current-score">
+                    &nbsp;
+                </div>
+                <div id="stopwatch">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="action">
+                <button id="start" class="start btn">New game</button>
+                <div class="level-outer">
+                    <button class="level btn" data-level="easy">Easy</button>
+                    <button class="level btn" data-level="normal">Normal</button>
+                    <button class="level btn" data-level="hard">Hard</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="side">
-        <div class="title">
-            <div class="title__text">
-                <span>v</span>
-                <span>e</span>
-                <span>n</span>
-                <span>d</span>
-                <span>o</span>
-                <span>r</span>
-                <span>-</span>
-                <span>p</span>
-                <span>a</span>
-                <span>i</span>
-                <span>r</span>
-                <span>f</span>
-                <span>i</span>
-                <span>x</span>
-            </div>
-        </div>
-        <div class="scores">
-            <div id="moves">
-                &nbsp;
-            </div>
-            <div id="current-score">
-                &nbsp;
-            </div>
-            <div id="stopwatch">
-                &nbsp;
-            </div>
-        </div>
-        <div class="action">
-            <button id="start" class="start btn">New game</button>
-            <div class="level-outer">
-                <button class="level btn" data-level="easy">Easy</button>
-                <button class="level btn" data-level="normal">Normal</button>
-                <button class="level btn" data-level="hard">Hard</button>
-            </div>
-        </div>
-    </div>
-
 </div>
 
 <script src="/bundle.js"></script>

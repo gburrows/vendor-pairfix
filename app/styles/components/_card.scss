@@ -11,15 +11,22 @@
   user-select: none;
   perspective: 2500px;
   border-radius: $card-radius-medium;
+  cursor: pointer;
 
   &__flipper {
     flex: 1;
     transform-style: preserve-3d;
-    transition: transform .2s ease, border-radius .2s ease .2s, border-color 0.3s ease;
+    transition: transform .2s ease, border-radius .2s ease .2s, border-color 0.3s ease, box-shadow 0.3s ease;
     transform: rotateY(180deg);
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
-    will-change: transform, border-radius, border-color;
+    box-shadow: 0 0.5rem #c3d5d6;
+    will-change: transform, border-radius, border-color, box-shadow;
     border-radius: $card-radius-medium;
+    margin-bottom: .5rem;
+
+    @include media("<=tablet") {
+      box-shadow: 0 0.3rem #c3d5d6;
+      margin-bottom: .3rem;
+    }
   }
 
   &__front, &__back {
@@ -51,23 +58,14 @@
     &:after {
       content: '';
       position: absolute;
-      top: -1px;
-      bottom: -1px;
-      left: -1px;
-      right: -1px;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       z-index: 2;
       border-radius: 0.5rem;
       border: 4px solid transparent;
       transition: border-color 0.3s ease;
-
-      @include media("<=tablet") {
-        border: 3px solid transparent;
-        //top: 0;
-        //bottom: 0;
-        //left: 0;
-        //right: 0;
-        //border-radius: $card-radius-medium;
-      }
     }
   }
 
@@ -88,28 +86,30 @@
     .card__flipper {
       transform: rotateY(0deg);
       background-size: 400% 400%;
-    }
+      box-shadow: 0 0.5rem #76e076;
 
-    .card__front:after {
-      border-color: #76e076;
+      @include media("<=tablet") {
+        box-shadow: 0 0.3rem #76e076;
+      }
     }
   }
 
   &--not-match {
     .card__flipper {
       transform: rotateY(0deg);
-    }
+      box-shadow: 0 0.5rem crimson;
 
-    .card__front:after {
-      border-color: crimson;
+      @include media("<=tablet") {
+        box-shadow: 0 0.3rem crimson;
+      }
     }
   }
 
   &--spin {
     .card__flipper {
-      -webkit-animation: cardSpin 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-      -moz-animation: cardSpin 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-      animation: cardSpin 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      -webkit-animation: jello-horizontal 0.7s both;
+      -moz-animation: jello-horizontal 0.7s both;
+      animation: jello-horizontal 0.7s both;
     }
   }
 }
