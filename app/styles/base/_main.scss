@@ -28,6 +28,17 @@ body {
   border: none;
   outline: 0;
   cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:focus {
+    outline: 0;
+  }
 }
 
 .app {
@@ -117,12 +128,12 @@ body {
     }
 
     @include media("<=tablet") {
-      grid-gap: .5rem;
+      grid-gap: .6rem;
       grid-template-columns: repeat(3, 1fr);
-      padding: .5rem;
-      padding-top: .75rem;
-      box-shadow: 0 0.3rem inset #c3d5d6;
-      border-radius: .75rem;
+      padding: .6rem;
+      padding-top: 1rem;
+      box-shadow: 0 0.4rem inset #c3d5d6;
+      border-radius: 1rem;
       width: 50vh;
 
       &[data-level="easy"] {
@@ -147,10 +158,6 @@ body {
   color: #7e8592;
   padding-right: 3rem;
 
-  @include media(">tablet", "<=desktop") {
-    flex: 0 0 200px;
-  }
-
   @include media("<=tablet") {
     flex-direction: row;
     flex-wrap: wrap;
@@ -160,10 +167,6 @@ body {
 
   .title {
     width: 200px;
-
-    @include media(">tablet", "<=desktop") {
-      width: 100%;
-    }
 
     @include media("<=tablet") {
       width: 100%;
@@ -176,12 +179,12 @@ body {
       line-height: 1;
 
       @include media(">tablet", "<=desktop") {
-        font-size: 2.4rem;
+        font-size: 3.6rem;
       }
 
       @include media("<=tablet") {
         flex-grow: 1;
-        font-size: 7.1vw;
+        font-size: 3rem;
         grid-template-columns: repeat(14, auto);
       }
 
@@ -269,7 +272,7 @@ body {
     visibility: hidden;
     transition: all .2s ease;
 
-    @include media("<=desktop") {
+    @include media("<=tablet") {
       flex-direction: row;
       flex-grow: 1;
       justify-content: space-around;
@@ -286,6 +289,9 @@ body {
 
     @include media("<=desktop") {
       font-size: 1.4rem;
+    }
+
+    @include media("<=tablet") {
       margin-bottom: 0;
     }
   }

@@ -12,6 +12,12 @@
   perspective: 2500px;
   border-radius: $card-radius-medium;
   cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+
+  @include media("<=tablet") {
+    border-radius: .4rem;
+  }
 
   &__flipper {
     flex: 1;
@@ -24,8 +30,9 @@
     margin-bottom: .5rem;
 
     @include media("<=tablet") {
-      box-shadow: 0 0.3rem #c3d5d6;
-      margin-bottom: .3rem;
+      box-shadow: 0 0.4rem #c3d5d6;
+      margin-bottom: .4rem;
+      border-radius: .4rem;
     }
   }
 
@@ -89,7 +96,7 @@
       box-shadow: 0 0.5rem #76e076;
 
       @include media("<=tablet") {
-        box-shadow: 0 0.3rem #76e076;
+        box-shadow: 0 0.4rem #76e076;
       }
     }
   }
@@ -100,7 +107,7 @@
       box-shadow: 0 0.5rem crimson;
 
       @include media("<=tablet") {
-        box-shadow: 0 0.3rem crimson;
+        box-shadow: 0 0.4rem crimson;
       }
     }
   }
